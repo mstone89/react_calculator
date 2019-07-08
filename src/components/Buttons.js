@@ -21,8 +21,11 @@ class Buttons extends Component {
             <div className="buttons-container">
                 {this.state.buttons.map((button, index) => {
                     return (
-                        <Button button={button} key={index} />
-                    )
+                        <Button
+                            button={button}
+                            key={index}
+                        />
+                    );
                 })}
             </div>
         );
