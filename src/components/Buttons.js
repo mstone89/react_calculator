@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import Button from './Button';
+
+const ButtonsContainer = styled.div `
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`
 
 class Buttons extends Component {
     constructor(props) {
@@ -18,7 +25,7 @@ class Buttons extends Component {
 
     render() {
         return (
-            <div className="buttons-container">
+            <ButtonsContainer>
                 {this.state.buttons.map((button, index) => {
                     return (
                         <Button
@@ -27,7 +34,7 @@ class Buttons extends Component {
                         />
                     );
                 })}
-            </div>
+            </ButtonsContainer>
         );
     }
 }

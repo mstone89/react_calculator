@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import Buttons from './components/Buttons';
 
-import './App.css';
+const CalculatorContainer = styled.div `
+    width: 400px;
+`
+
+const StyledDisplay = styled.div `
+    font-size: 50px;
+    width: 400px;
+    text-align: right;
+`
 
 class App extends Component {
     constructor(props) {
@@ -14,12 +23,10 @@ class App extends Component {
 
     render() {
         return (
-            <div className="calculator-container">
-                <div className="display">
-                    {this.state.initialValue}
-                </div>
+            <CalculatorContainer>
+                <StyledDisplay>{this.state.initialValue}</StyledDisplay>
                 <Buttons />
-            </div>
+            </CalculatorContainer>
         );
     }
 }
