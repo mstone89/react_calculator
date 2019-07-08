@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 
+import Button from './Button';
+
 class Buttons extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            buttons: [
+                'AC', '+/-', '%', '/',
+                7, 8, 9, '*',
+                4, 5, 6, '-',
+                1, 2, 3, '+',
+                ' ', 0, '.', '='
+            ]
+        }
+    }
+
     render() {
         return (
-            <div>This is the buttons container</div>
+            <div className="buttons-container">
+                {this.state.buttons.map((button, index) => {
+                    return (
+                        <Button button={button} key={index} />
+                    )
+                })}
+            </div>
         );
     }
 }
