@@ -26,19 +26,28 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialValue: 0,
-            updatedValue: ''
+            value: 0
         }
         this.determineAction = this.determineAction.bind(this);
+        this.clearDisplay = this.clearDisplay.bind(this);
+    }
+
+    clearDisplay() {
+        this.setState({
+            value: 0
+        });
     }
 
     determineAction(button) {
         if (typeof button === 'number') {
             this.setState((currentState) => {
                 return {
-                    updatedValue: currentState.updatedValue + button
+                    value: currentState.value * 10 + button
                 }
             });
+        }
+        if (button === 'AC') {
+            this.clearDisplay();
         }
     }
 
@@ -46,11 +55,7 @@ class App extends Component {
         return (
             <CalculatorContainer>
                 <StyledDisplay>
-                    {
-                        this.state.updatedValue
-                        ?  this.state.updatedValue
-                        : this.state.initialValue
-                    }
+                    {this.state.value}
                     </StyledDisplay>
                 <Buttons
                     handleDetermineAction={this.determineAction}
