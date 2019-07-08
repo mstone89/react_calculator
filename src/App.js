@@ -9,30 +9,52 @@ const CalculatorContainer = styled.div `
     border-radius: 10px;
     padding: 10px;
     background-color: lightgray;
+    font-family: Helevetica, sans-serif;
 `
 
 const StyledDisplay = styled.div `
     font-size: 50px;
     color: white;
-    width: 400px;
+    width: 390px;
     text-align: right;
     background-color: cornflowerblue;
     border-radius: 5px;
+    padding-right: 10px;
 `
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialValue: 0
+            initialValue: 0,
+            updatedValue: ''
+        }
+        this.determineAction = this.determineAction.bind(this);
+    }
+
+    determineAction(button) {
+        if (typeof button === 'number') {
+            this.setState((currentState) => {
+                return {
+                    updatedValue: currentState.updatedValue + button
+                }
+            });
         }
     }
 
     render() {
         return (
             <CalculatorContainer>
-                <StyledDisplay>{this.state.initialValue}</StyledDisplay>
-                <Buttons />
+                <StyledDisplay>
+                    {
+                        this.state.updatedValue
+                        ?  this.state.updatedValue
+                        : this.state.initialValue
+                    }
+                    </StyledDisplay>
+                <Buttons
+                    handleDetermineAction={this.determineAction}
+                />
             </CalculatorContainer>
         );
     }

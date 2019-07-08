@@ -12,7 +12,11 @@ const StyledButton = styled.div `
 class Button extends Component {
     render() {
         return (
-            <StyledButton>
+            <StyledButton
+                onClick={() => {
+                    this.props.handleDetermineAction(this.props.button)
+                }}
+            >
                 {this.props.button}
             </StyledButton>
         );

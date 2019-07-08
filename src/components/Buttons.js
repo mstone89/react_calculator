@@ -18,7 +18,7 @@ class Buttons extends Component {
                 7, 8, 9, '*',
                 4, 5, 6, '-',
                 1, 2, 3, '+',
-                'null', 0, '.', '='
+                ' ', 0, '.', '='
             ]
         }
     }
@@ -31,6 +31,7 @@ class Buttons extends Component {
                         <Button
                             button={button}
                             key={index}
+                            handleDetermineAction={this.props.handleDetermineAction}
                         />
                     );
                 })}
