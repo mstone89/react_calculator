@@ -27,7 +27,8 @@ class App extends Component {
         super(props);
         this.state = {
             value: 0,
-            decimal: false
+            decimal: false,
+            operator: false
         }
         this.determineAction = this.determineAction.bind(this);
         this.setValue = this.setValue.bind(this);
@@ -35,17 +36,18 @@ class App extends Component {
         this.togglePosNeg = this.togglePosNeg.bind(this);
         this.calculatePercentage = this.calculatePercentage.bind(this);
         this.addDecimalSymbol = this.addDecimalSymbol.bind(this);
+        this.processOperator = this.processOperator.bind(this);
     }
 
-    setValue(button) {
+    setValue(symbol) {
         this.setState((currentState) => {
             if (currentState.value === 0) {
                 return {
-                    value: currentState.value + button
+                    value: currentState.value + symbol
                 }
             } else {
                 return {
-                    value: parseFloat(currentState.value.toString() + button)
+                    value: parseFloat(currentState.value.toString() + symbol)
                 }
             }
         });
@@ -78,22 +80,36 @@ class App extends Component {
         });
     }
 
-    determineAction(button) {
-        if (typeof button === 'number') {
-            this.setValue(button);
+    processOperator(symbol) {
+        console.log(symbol)
+    }
+
+    determineAction(symbol) {
+        if (typeof symbol === 'number') {
+            this.setValue(symbol);
+            return;
         }
-        if (button === 'AC') {
+        if (symbol === 'AC') {
             this.clearDisplay();
+            return;
         }
-        if (button === '+/-') {
+        if (symbol === '+/-') {
             this.togglePosNeg();
+            return;
         }
-        if (button === '%') {
+        if (symbol === '%') {
             this.calculatePercentage();
+            return;
         }
-        if (button === '.' && !this.state.decimal) {
+        if (symbol === '.' && !this.state.decimal) {
             this.addDecimalSymbol();
+            return;
         }
+        if (symbol === '=') {
+            console.log(symbol);
+            return;
+        }
+        this.processOperator(symbol);
     }
 
     render() {
