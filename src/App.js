@@ -28,7 +28,9 @@ class App extends Component {
         this.state = {
             value: 0,
             decimal: false,
-            operator: false
+            operator: false,
+            values: [],
+            calculations: []
         }
         this.determineAction = this.determineAction.bind(this);
         this.setValue = this.setValue.bind(this);
@@ -81,13 +83,27 @@ class App extends Component {
     }
 
     processOperator(symbol) {
-        console.log(symbol)
+        this.setState((currentState) => {
+            return {
+                operator: true,
+                values: currentState.values.concat([currentState.value]),
+                calculations: currentState.calculations.concat([symbol])
+            }
+        });
     }
 
     determineAction(symbol) {
         if (typeof symbol === 'number') {
-            this.setValue(symbol);
-            return;
+            if (!this.state.operator) {
+                this.setValue(symbol);
+                return;
+            } else {
+                this.setState({
+                    value: symbol,
+                    operator: false
+                });
+                return;
+            }
         }
         if (symbol === 'AC') {
             this.clearDisplay();
@@ -113,7 +129,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.value);
         return (
             <CalculatorContainer>
                 <StyledDisplay>
