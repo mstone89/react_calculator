@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.div `
@@ -9,18 +9,16 @@ const StyledButton = styled.div `
     border: 1px solid gray;
 `
 
-class Button extends Component {
-    render() {
-        return (
-            <StyledButton
-                onClick={() => {
-                    this.props.handleDetermineAction(this.props.button)
-                }}
-            >
-                {this.props.button}
-            </StyledButton>
-        );
-    }
+const Button = (props) => {
+    return (
+        <StyledButton
+            onClick={() => {
+                props.handleDetermineAction(props.button)
+            }}
+        >
+            {props.button}
+        </StyledButton>
+    );
 }
 
 export default Button;
