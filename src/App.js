@@ -32,17 +32,18 @@ class App extends Component {
         this.setValue = this.setValue.bind(this);
         this.clearDisplay = this.clearDisplay.bind(this);
         this.togglePosNeg = this.togglePosNeg.bind(this);
+        this.calculatePercentage = this.calculatePercentage.bind(this);
     }
 
     setValue(button) {
         this.setState((currentState) => {
-            if (this.state.value > 0) {
+            if (currentState.value === 0) {
                 return {
-                    value: currentState.value * 10 + button
+                    value: currentState.value + button
                 }
             } else {
                 return {
-                    value: parseInt(currentState.value.toString() + button)
+                    value: parseFloat(currentState.value.toString() + button)
                 }
             }
         });
@@ -60,6 +61,12 @@ class App extends Component {
         });
     }
 
+    calculatePercentage() {
+        this.setState({
+            value: this.state.value / 100
+        });
+    }
+
     determineAction(button) {
         if (typeof button === 'number') {
             this.setValue(button);
@@ -70,9 +77,13 @@ class App extends Component {
         if (button === '+/-') {
             this.togglePosNeg();
         }
+        if (button === '%') {
+            this.calculatePercentage();
+        }
     }
 
     render() {
+        console.log(this.state.value);
         return (
             <CalculatorContainer>
                 <StyledDisplay>
