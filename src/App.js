@@ -26,13 +26,15 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 0
+            value: 0,
+            decimal: false
         }
         this.determineAction = this.determineAction.bind(this);
         this.setValue = this.setValue.bind(this);
         this.clearDisplay = this.clearDisplay.bind(this);
         this.togglePosNeg = this.togglePosNeg.bind(this);
         this.calculatePercentage = this.calculatePercentage.bind(this);
+        this.addDecimalSymbol = this.addDecimalSymbol.bind(this);
     }
 
     setValue(button) {
@@ -67,6 +69,15 @@ class App extends Component {
         });
     }
 
+    addDecimalSymbol() {
+        this.setState((currentState) => {
+            return {
+                value: currentState.value + '.',
+                decimal: true
+            }
+        });
+    }
+
     determineAction(button) {
         if (typeof button === 'number') {
             this.setValue(button);
@@ -79,6 +90,9 @@ class App extends Component {
         }
         if (button === '%') {
             this.calculatePercentage();
+        }
+        if (button === '.' && !this.state.decimal) {
+            this.addDecimalSymbol();
         }
     }
 
