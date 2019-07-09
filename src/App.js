@@ -57,7 +57,11 @@ class App extends Component {
 
     clearDisplay() {
         this.setState({
-            value: 0
+            value: 0,
+            decimal: false,
+            operator: false,
+            values: [],
+            calculations: []
         });
     }
 
@@ -129,6 +133,9 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.value);
+        console.log(this.state.values);
+        console.log(this.state.calculations);
         return (
             <CalculatorContainer>
                 <StyledDisplay>
